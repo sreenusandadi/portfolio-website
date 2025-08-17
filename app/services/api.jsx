@@ -20,8 +20,8 @@ const getProjects = async () => {
 
 const getAchievements = async () => {
   try {
-    const res = await api.get(`${baseUrl}/api/achievements`);
-    return res.data;
+    const res = await fetch(`${baseUrl}/api/achievements`);
+    return res.json();
   } catch (error) {
     console.log(error);
   }

@@ -12,7 +12,6 @@ export default function AboutSection() {
   useEffect(() => {
     const getData = async () => {
       const courses = await getCourses();
-      console.log(courses);
       setSkills(courses);
     };
     getData();

@@ -36,7 +36,6 @@ const getCourse = asyncHandler(async (req, res) => {
 const updateCourse = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const course = await Course.findById(id);
-  console.log("course details:", course);
   if (!course) {
     res.status(404);
     throw new Error("Course not found");
@@ -50,7 +49,6 @@ const updateCourse = asyncHandler(async (req, res) => {
 const deleteCourse = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const course = await Course.findById(id);
-  console.log("Course", course);
   if (!course) {
     res.status(404);
     throw new Error("Course not found");

@@ -14,7 +14,6 @@ export default function ProjectSection() {
   useEffect(() => {
     const getData = async () => {
       const projectsList = await getProjects();
-      console.log(projectsList);
       setProjects(projectsList);
     };
     getData();
