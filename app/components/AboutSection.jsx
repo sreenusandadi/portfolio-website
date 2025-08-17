@@ -1,51 +1,32 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useTransition } from "react";
+import React, { useEffect, useRef, useState, useTransition } from "react";
 import TabButton from "./TabButton";
-
-const TAB_DATA = [
-  {
-    title: "Skills",
-    id: "skills",
-    content: (
-      <ul className="list-disc pl-5">
-        <li>Next JS</li>
-        <li>React JS</li>
-        <li>Node JS</li>
-        <li>Mongo DB</li>
-      </ul>
-    ),
-  },
-  {
-    title: "Education",
-    id: "education",
-    content: (
-      <ul className="list-disc pl-5">
-        <li>Masters in Frontend Development</li>
-        <li>Implemented wesites with MERN stack</li>
-      </ul>
-    ),
-  },
-  {
-    title: "Certifications",
-    id: "certifications",
-    content: (
-      <ul className="list-disc pl-5">
-        <li>Excellance awards on Udemy Node JS test</li>
-        <li>Best employee of the quarter</li>
-      </ul>
-    ),
-  },
-];
+import { getCourses } from "../services/api";
 
 export default function AboutSection() {
+  const [skills, setSkills] = useState([]);
   const [tab, setTab] = useState("skills");
   const [isPending, startTransition] = useTransition();
+  const ulRef = useRef();
+
+  useEffect(() => {
+    const getData = async () => {
+      const courses = await getCourses();
+      console.log(courses);
+      setSkills(courses);
+    };
+    getData();
+  }, []);
 
   const handletabChange = (id) => {
     startTransition(() => {
       setTab(id);
     });
+  };
+
+  const useSanitizedHtml = (htmlString) => {
+    return DOMPurify.sanitize(htmlString);
   };
 
   return (
@@ -68,7 +49,7 @@ export default function AboutSection() {
             content of a page when looking at its layout
           </p>
           <div className="flex mt-8 gap-3">
-            {TAB_DATA.map((tabItem, index) => (
+            {skills.map((tabItem, index) => (
               <div key={index}>
                 <TabButton
                   key={index}
@@ -80,9 +61,17 @@ export default function AboutSection() {
               </div>
             ))}
           </div>
-          <ul className="mt-5">
-            <li>{TAB_DATA.find((item) => item.id === tab).content}</li>
-          </ul>
+          {skills.length > 0 ? (
+            <ul className="mt-5" ref={ulRef}>
+              {
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: skills?.find((item) => item.id === tab).content,
+                  }}
+                ></div>
+              }
+            </ul>
+          ) : null}
         </div>
       </div>
     </section>
