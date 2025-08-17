@@ -20,7 +20,7 @@ export default function AchievementSection() {
     };
     getData();
   }, []);
-  return achievements.length > 0 ? (
+  return achievements && achievements.length > 0 ? (
     <div className="flex flex-col sm:flex-row border-0 text-white items-center justify-between gap-16 py-6 px-6 sm:border border-[#33353F] rounded-lg mt-6">
       {achievements.map((achievement, index) => (
         <div key={index} className="">

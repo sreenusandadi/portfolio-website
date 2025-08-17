@@ -1,13 +1,9 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://localhost:5000",
-});
+const baseUrl = process.env.BASE_URL || "http://localhost:5000";
 
 const getCourses = async () => {
   try {
-    const res = await api.get("/api/courses");
-    return res.data;
+    const res = await fetch(`${baseUrl}/api/courses`);
+    return res.json();
   } catch (error) {
     console.log(error);
   }
@@ -15,8 +11,8 @@ const getCourses = async () => {
 
 const getProjects = async () => {
   try {
-    const res = await api.get("/api/projects");
-    return res.data;
+    const res = await fetch(`${baseUrl}/api/projects`);
+    return res.json();
   } catch (error) {
     console.log(error);
   }
@@ -24,7 +20,7 @@ const getProjects = async () => {
 
 const getAchievements = async () => {
   try {
-    const res = await api.get("/api/achievements");
+    const res = await api.get(`${baseUrl}/api/achievements`);
     return res.data;
   } catch (error) {
     console.log(error);
