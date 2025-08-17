@@ -44,16 +44,17 @@ export default function ProjectSection() {
         />
       </div>
       <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-        {filterdTags.map((project) => (
-          <ProjectCard
-            key={project._id}
-            title={project.title}
-            description={project.description}
-            imageUrl={project.image}
-            gitUrl={project.gitUrl}
-            previewUrl={project.previewUrl}
-          />
-        ))}
+        {filterdTags &&
+          filterdTags.map((project) => (
+            <ProjectCard
+              key={project._id}
+              title={project.title}
+              description={project.description}
+              imageUrl={project.image}
+              gitUrl={project.gitUrl}
+              previewUrl={project.previewUrl}
+            />
+          ))}
       </div>
     </>
   );

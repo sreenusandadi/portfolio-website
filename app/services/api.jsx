@@ -22,4 +22,13 @@ const getProjects = async () => {
   }
 };
 
-export { getCourses, getProjects };
+const getAchievements = async () => {
+  try {
+    const res = await api.get("/api/achievements");
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getCourses, getProjects, getAchievements };

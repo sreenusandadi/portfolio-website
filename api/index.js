@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const couresRoute = require("./src/routes/course-routes");
 const projectRoutes = require("./src/routes/projectRoutes");
+const achivementRoutes = require("./src/routes/achivementRoutes");
 const errorHandler = require("./src/middleware/errorHandler");
 const connectDb = require("./src/config/dbConnection");
 const cors = require("cors");
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/courses", couresRoute);
 app.use("/api/projects", projectRoutes);
+app.use("/api/achievements", achivementRoutes);
 app.use(errorHandler);
 
 app.listen(port, () => {
